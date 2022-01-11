@@ -22,38 +22,32 @@ const Header = () => {
         <DesktopNav>
           <NavLink href="/sale">
             <NavContent>
-              Sale
-              <span>Sale</span>
+              <span data-hover="Sale">Sale</span>
             </NavContent>
           </NavLink>
           <NavLink href="/new">
             <NavContent>
-              New&nbsp;Releases
-              <span>New&nbsp;Releases</span>
+              <span data-hover="New&nbsp;Releases">New&nbsp;Releases</span>
             </NavContent>
           </NavLink>
           <NavLink href="/men">
             <NavContent>
-              Men
-              <span>Men</span>
+              <span data-hover="Men">Men</span>
             </NavContent>
           </NavLink>
           <NavLink href="/women">
            <NavContent>
-              Women
-              <span>Women</span>
+              <span data-hover="Women">Women</span>
             </NavContent>
           </NavLink>
           <NavLink href="/kids">
             <NavContent>
-              Kids
-              <span>Kids</span>
+              <span data-hover="Kids">Kids</span>
             </NavContent>
             </NavLink>
           <NavLink href="/collections">
             <NavContent>
-              Collections
-              <span>Collections</span>
+              <span data-hover="Collections">Collections</span>
             </NavContent>
           </NavLink>
         </DesktopNav>
@@ -143,38 +137,67 @@ const Filler = styled.div`
   }
 `;
 
-const NavWrapper = styled.div`
-
-`;
-
 
 const NavLink = styled.a`
   --timing-in: 250ms;
   --timing-out: calc(2 * var(--timing-in));
   font-size: 1.125rem;
-  display: block;
-  height: 25px;
-  overflow: hidden;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
-  &:hover > :first-child {
-    transform: translateY(-50%);
-    transition: var(--timing-in);
-  }
   &:first-of-type {
     color: var(--color-secondary);
   }
 `;
 
 const NavContent = styled.div`
-  transform: translateY(0%);
-  transition: transform var(--timing-out);
-  & > span {
-    display: block;
-    font-weight: ${WEIGHTS.bold};
+  perspective: 1000px;
+  text-align: center;
+
+    & > span {
+    position: relative;
+    line-height: 32px;
+     display: block;
+     padding-inline: 16px;
+    color: var(--color-white);
+    background: #2195de;
+    transition: transform 500ms ease-out;
+    /* so the boxes rotate in the correct location */
+    transform-origin: center top;
+    transform-style: preserve-3d;
   }
+
+  & > span::before {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0965a0;
+    content: attr(data-hover);
+    transition: background 300ms;
+    font-weight: ${WEIGHTS.bold};
+    transform: rotateX(-90deg);
+    /* so the boxes rotate in the correct location */
+    transform-origin: center top;
+  }
+
+
+
+  &:hover span {
+    transform: rotateX(90deg) translateY(-22px);
+    transition: 300ms;
+  }
+
+  &:hover span::before {
+    background: #28a2ee;
+  }
+
+
   `;
 
 export default Header;
