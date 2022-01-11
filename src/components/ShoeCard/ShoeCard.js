@@ -32,48 +32,61 @@ const ShoeCard = ({
       : 'default'
 
   return (
-    <Link href={`/shoe/${slug}`}>
-      <Wrapper>
-        <ImageWrapper>
-          <Image alt="" src={imageSrc} />
-          {variant === 'on-sale' && <SaleFlag>Sale</SaleFlag>}
-          {variant === 'new-release' && (
-            <NewFlag>Just released!</NewFlag>
-          )}
-        </ImageWrapper>
-        <Spacer size={12} />
-        <Row>
-          <Name>{name}</Name>
-          <Price
-            style={{
-              '--color':
-                variant === 'on-sale'
-                  ? 'var(--color-gray-700)'
-                  : undefined,
-              '--text-decoration':
-                variant === 'on-sale' ? 'line-through' : undefined,
-            }}
-          >
-            {formatPrice(price)}
-          </Price>
-        </Row>
-        <Row>
-          <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
-          {variant === 'on-sale' ? (
-            <SalePrice>{formatPrice(salePrice)}</SalePrice>
-          ) : undefined}
-        </Row>
-      </Wrapper>
-    </Link>
+    <OuterWrapper>
+      <Link href={`/shoe/${slug}`}>
+        <Wrapper>
+          <ImageWrapper>
+            <Image alt="" src={imageSrc} />
+            {variant === 'on-sale' && <SaleFlag>Sale</SaleFlag>}
+            {variant === 'new-release' && (
+              <NewFlag>Just released!</NewFlag>
+            )}
+          </ImageWrapper>
+          <Spacer size={12} />
+          <Row>
+            <Name>{name}</Name>
+            <Price
+              style={{
+                '--color':
+                  variant === 'on-sale'
+                    ? 'var(--color-gray-700)'
+                    : undefined,
+                '--text-decoration':
+                  variant === 'on-sale' ? 'line-through' : undefined,
+              }}
+            >
+              {formatPrice(price)}
+            </Price>
+          </Row>
+          <Row>
+            <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
+            {variant === 'on-sale' ? (
+              <SalePrice>{formatPrice(salePrice)}</SalePrice>
+            ) : undefined}
+          </Row>
+        </Wrapper>
+      </Link>
+    </OuterWrapper>
   );
 };
 
+const OuterWrapper = styled.div`
+`;
 const Link = styled.a`
+  --trans-timing-in: 250ms;
+  --trans-timing-out: calc(3 * var(--trans-timing-in));
   text-decoration: none;
   color: inherit;
+  &:hover > :first-child {
+     filter: drop-shadow(16px 16px 20px hsla(0deg, 0%, 0%, 0.2));
+    transform: perspective(500px) rotateY(-20deg);
+    transition: transform var(--trans-timing-in), filter var(--trans-timing-in);
+  }
 `;
 
-const Wrapper = styled.article``;
+const Wrapper = styled.article`
+  transition: var(--trans-timing-out);
+`;
 
 const ImageWrapper = styled.div`
   position: relative;
@@ -81,7 +94,12 @@ const ImageWrapper = styled.div`
   overflow: hidden;
   &:hover img {
     transform: scale(1.1);
-    transition: 200ms;
+    transition: transform, filter;
+    transition-duration: var(--trans-timing-in);
+    filter: saturate(100%);
+  }
+  &:hover div {
+   animation: wobble 600ms;
   }
 `;
 
@@ -89,8 +107,10 @@ const Image = styled.img`
   width: 100%;
   display: block;
    will-change: transform;
-   transition: transform 500ms;
-  transform-origin: center  70%;
+   transition: transform, filter;
+   transition-duration:  var(--trans-timing-out);
+  transform-origin: center 70%;
+  filter: saturate(50%);
 `;
 
 const Row = styled.div`
@@ -138,5 +158,7 @@ const SaleFlag = styled(Flag)`
 const NewFlag = styled(Flag)`
   background-color: var(--color-secondary);
 `;
+
+
 
 export default ShoeCard;
