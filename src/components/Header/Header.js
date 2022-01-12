@@ -21,34 +21,22 @@ const Header = () => {
         </LogoWrapper>
         <DesktopNav>
           <NavLink href="/sale">
-            <NavContent>
-              <span data-hover="Sale">Sale</span>
-            </NavContent>
+            <span data-hover="Sale">Sale</span>
           </NavLink>
           <NavLink href="/new">
-            <NavContent>
               <span data-hover="New&nbsp;Releases">New&nbsp;Releases</span>
-            </NavContent>
           </NavLink>
           <NavLink href="/men">
-            <NavContent>
               <span data-hover="Men">Men</span>
-            </NavContent>
           </NavLink>
           <NavLink href="/women">
-           <NavContent>
               <span data-hover="Women">Women</span>
-            </NavContent>
           </NavLink>
           <NavLink href="/kids">
-            <NavContent>
               <span data-hover="Kids">Kids</span>
-            </NavContent>
             </NavLink>
           <NavLink href="/collections">
-            <NavContent>
               <span data-hover="Collections">Collections</span>
-            </NavContent>
           </NavLink>
         </DesktopNav>
         <MobileActions>
@@ -146,25 +134,25 @@ const NavLink = styled.a`
   text-decoration: none;
   color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
+  --trans-time-in: 250ms;
+  --trans-time-out: calc(2 * var(--trans-time-in));
+  perspective: 1000px;
+  text-align: center;
   &:first-of-type {
     color: var(--color-secondary);
   }
-`;
 
-const NavContent = styled.div`
-  perspective: 1000px;
-  text-align: center;
-
-    & > span {
+  & > span {
     position: relative;
     line-height: 32px;
      display: block;
      padding-inline: 16px;
     color: var(--color-white);
     background: #2195de;
-    transition: transform 500ms ease-out;
+    transition: transform var(--trans-time-out) ease-out;
+    will-change: transform;
     /* so the boxes rotate in the correct location */
-    transform-origin: center top;
+    transform-origin: 50% 0%;
     transform-style: preserve-3d;
   }
 
@@ -179,25 +167,19 @@ const NavContent = styled.div`
     height: 100%;
     background: #0965a0;
     content: attr(data-hover);
-    transition: background 300ms;
+    transition: filter var(--trans-time-out);
     font-weight: ${WEIGHTS.bold};
     transform: rotateX(-90deg);
-    /* so the boxes rotate in the correct location */
-    transform-origin: center top;
+    /* so the boxes rotate along top of boxes */
+    transform-origin: 50% 0%;
   }
-
-
-
   &:hover span {
     transform: rotateX(90deg) translateY(-22px);
-    transition: 300ms;
+    transition: var(--trans-time-in);
   }
-
   &:hover span::before {
-    background: #28a2ee;
+    filter: brightness(1.8);
   }
-
-
-  `;
+`;
 
 export default Header;
