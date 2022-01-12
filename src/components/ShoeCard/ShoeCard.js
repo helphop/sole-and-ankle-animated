@@ -86,6 +86,7 @@ const Link = styled.a`
 
 const Wrapper = styled.article`
   transition: var(--trans-timing-out);
+  transition-delay: var(--trans-timing-in);
 `;
 
 const ImageWrapper = styled.div`
@@ -94,7 +95,7 @@ const ImageWrapper = styled.div`
   overflow: hidden;
   &:hover img {
     transform: scale(1.1);
-    transition: transform, filter;
+    transition: transform filter;
     transition-duration: var(--trans-timing-in);
     filter: saturate(100%);
   }
@@ -107,7 +108,7 @@ const Image = styled.img`
   width: 100%;
   display: block;
    will-change: transform;
-   transition: transform, filter;
+   transition: transform filter;
    transition-duration:  var(--trans-timing-out);
   transform-origin: center 70%;
   filter: saturate(50%);
