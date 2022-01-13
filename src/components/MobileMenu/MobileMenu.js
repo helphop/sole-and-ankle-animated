@@ -52,16 +52,16 @@ const Overlay = styled(DialogOverlay)`
   animation: fadeIn var(--timing-in-fast);
 `;
 
+
 const Content = styled(DialogContent)`
+  --text-animation: fadeIn var(--timing-in-slow) calc(3 * var(--timing-delay)) ease-out backwards;
   background: white;
   width: 300px;
   height: 100%;
   padding: 24px 32px;
   display: flex;
   flex-direction: column;
-  animation: slideIn var(--timing-in-fast) ease-out;
-  animation-delay: var(--timing-delay);
-  animation-fill-mode: backwards;
+  animation: slideIn var(--timing-in-fast) var(--timing-delay) cubic-bezier(.27,.16,.54,1.4) backwards;
 `;
 
 const CloseButton = styled(UnstyledButton)`
@@ -75,8 +75,7 @@ const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  animation: fadeIn var(--timing-in-slow) ease-out backwards;
-  animation-delay: calc(2 * var(--timing-delay));
+  animation: var(--text-animation);
 `;
 
 const NavLink = styled.a`
@@ -85,7 +84,6 @@ const NavLink = styled.a`
   text-decoration: none;
   font-size: 1.125rem;
   text-transform: uppercase;
-
   &:first-of-type {
     color: var(--color-secondary);
   }
@@ -101,8 +99,7 @@ const Footer = styled.footer`
   flex-direction: column;
   gap: 14px;
   justify-content: flex-end;
-  animation: fadeIn var(--timing-in-slow) ease-out backwards;
-  animation-delay: calc(2 * var(--timing-delay));
+  animation: var(--text-animation);
 `;
 
 const SubLink = styled.a`

@@ -18,3 +18,4 @@ export function pluralize(string, num) {
 export function isNewShoe(releaseDate) {
   return differenceInDays(new Date(), releaseDate) < 30;
 }
+
