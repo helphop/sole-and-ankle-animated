@@ -41,6 +41,9 @@ const Overlay = styled(DialogOverlay)`
   --timing-in-fast: 300ms;
   --timing-in-slow: 550ms;
   --timing-delay: 150ms;
+  perspective: 1000px;
+  animation: fadeIn var(--timing-in-fast);
+   will-change: transform;
   position: fixed;
   top: 0;
   left: 0;
@@ -48,8 +51,7 @@ const Overlay = styled(DialogOverlay)`
   bottom: 0;
   background: var(--color-backdrop);
   display: flex;
-  justify-content: flex-end;
-  animation: fadeIn var(--timing-in-fast);
+  justify-content: flex-end;;
 `;
 
 
@@ -61,7 +63,10 @@ const Content = styled(DialogContent)`
   padding: 24px 32px;
   display: flex;
   flex-direction: column;
-  animation: slideIn var(--timing-in-fast) var(--timing-delay) cubic-bezier(.27,.16,.54,1.4) backwards;
+  // animation: slideIn var(--timing-in-fast) var(--timing-delay) cubic-bezier(.27,.16,.54,1.4) backwards;
+  animation: swingIn var(--timing-in-fast) var(--timing-delay) cubic-bezier(.51,.52,.4,.98) backwards;
+  will-change: transform;
+  transform-origin: 100% 50%;
 `;
 
 const CloseButton = styled(UnstyledButton)`

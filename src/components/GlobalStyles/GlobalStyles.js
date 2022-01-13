@@ -123,6 +123,16 @@ html, body, #root {
     transform: translateX(0%);
   }
 }
+
+@keyframes swingIn {
+  from {
+    transform: rotateY(-180deg);
+  }
+
+  to {
+    transform: rotateY(0deg);
+  }
+}
 `;
 
 export default GlobalStyles;
