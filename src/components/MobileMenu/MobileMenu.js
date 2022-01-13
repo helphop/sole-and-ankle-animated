@@ -39,7 +39,7 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
 
 const Overlay = styled(DialogOverlay)`
   --timing-in-fast: 300ms;
-  --timing-in-slow: 500ms;
+  --timing-in-slow: 550ms;
   --timing-delay: 150ms;
   position: fixed;
   top: 0;
@@ -75,7 +75,7 @@ const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  animation: var(--text-animation);
+  // animation: var(--text-animation);
 `;
 
 const NavLink = styled.a`
@@ -86,6 +86,23 @@ const NavLink = styled.a`
   text-transform: uppercase;
   &:first-of-type {
     color: var(--color-secondary);
+  }
+  animation: fadeIn 900ms calc( 3 * var(--timing-delay)) backwards;
+
+  &:nth-child(2) {
+    animation-delay: calc(3.5 * var(--timing-delay));
+  }
+  &:nth-child(3) {
+    animation-delay: calc(4 * var(--timing-delay));
+  }
+  &:nth-child(4) {
+    animation-delay: calc(4.5 * var(--timing-delay));
+  }
+  &:nth-child(5) {
+    animation-delay: calc(5 * var(--timing-delay));
+  }
+  &:nth-child(6) {
+    animation-delay: calc(5.5 * var(--timing-delay));
   }
 `;
 
@@ -99,7 +116,7 @@ const Footer = styled.footer`
   flex-direction: column;
   gap: 14px;
   justify-content: flex-end;
-  animation: var(--text-animation);
+  animation: fadeIn var(--timing-in-slow) calc(7 * var(--timing-delay)) ease-out backwards;
 `;
 
 const SubLink = styled.a`
