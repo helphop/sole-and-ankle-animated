@@ -103,6 +103,26 @@ html, body, #root {
     transform: rotate(0deg);
   }
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}
 `;
 
 export default GlobalStyles;

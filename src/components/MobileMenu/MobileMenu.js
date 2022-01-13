@@ -11,7 +11,7 @@ import VisuallyHidden from '../VisuallyHidden';
 
 const MobileMenu = ({ isOpen, onDismiss }) => {
   return (
-    <Overlay isOpen={isOpen} onDismiss={onDismiss}>
+    <Overlay isOpen={isOpen} onDismiss={onDismiss} >
       <Content aria-label="Menu">
         <CloseButton onClick={onDismiss}>
           <Icon id="close" />
@@ -36,7 +36,11 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
   );
 };
 
+
 const Overlay = styled(DialogOverlay)`
+  --timing-in-fast: 300ms;
+  --timing-in-slow: 500ms;
+  --timing-delay: 150ms;
   position: fixed;
   top: 0;
   left: 0;
@@ -45,6 +49,7 @@ const Overlay = styled(DialogOverlay)`
   background: var(--color-backdrop);
   display: flex;
   justify-content: flex-end;
+  animation: fadeIn var(--timing-in-fast);
 `;
 
 const Content = styled(DialogContent)`
@@ -54,6 +59,9 @@ const Content = styled(DialogContent)`
   padding: 24px 32px;
   display: flex;
   flex-direction: column;
+  animation: slideIn var(--timing-in-fast) ease-out;
+  animation-delay: var(--timing-delay);
+  animation-fill-mode: backwards;
 `;
 
 const CloseButton = styled(UnstyledButton)`
@@ -67,6 +75,8 @@ const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  animation: fadeIn var(--timing-in-slow) ease-out backwards;
+  animation-delay: calc(2 * var(--timing-delay));
 `;
 
 const NavLink = styled.a`
@@ -84,12 +94,15 @@ const NavLink = styled.a`
 const Filler = styled.div`
   flex: 1;
 `;
+
 const Footer = styled.footer`
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 14px;
   justify-content: flex-end;
+  animation: fadeIn var(--timing-in-slow) ease-out backwards;
+  animation-delay: calc(2 * var(--timing-delay));
 `;
 
 const SubLink = styled.a`
