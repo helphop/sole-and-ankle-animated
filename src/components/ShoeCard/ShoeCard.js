@@ -32,18 +32,17 @@ const ShoeCard = ({
       : 'default'
 
   return (
-    <OuterWrapper>
-      <Link href={`/shoe/${slug}`}>
-        <Wrapper>
-          <ImageWrapper>
+      <Link className="container" href={`/shoe/${slug}`}>
+        <Wrapper className='card'>
+          <ImageWrapper className='sneaker'>
             <Image alt="" src={imageSrc} />
-            {variant === 'on-sale' && <SaleFlag>Sale</SaleFlag>}
-            {variant === 'new-release' && (
-              <NewFlag>Just released!</NewFlag>
-            )}
           </ImageWrapper>
+          {variant === 'on-sale' && <SaleFlag className='info'>Sale</SaleFlag>}
+          {variant === 'new-release' && (
+            <NewFlag className='info'>Just released!</NewFlag>
+          )}
           <Spacer size={12} />
-          <Row>
+          <Row className='description'>
             <Name>{name}</Name>
             <Price
               style={{
@@ -66,52 +65,57 @@ const ShoeCard = ({
           </Row>
         </Wrapper>
       </Link>
-    </OuterWrapper>
   );
 };
 
-const OuterWrapper = styled.div`
-`;
+
 const Link = styled.a`
   --trans-timing-in: 250ms;
   --trans-timing-out: calc(3 * var(--trans-timing-in));
   text-decoration: none;
   color: inherit;
-  &:hover > :first-child {
-     filter: drop-shadow(16px 16px 20px hsla(0deg, 0%, 0%, 0.2));
-    transform: perspective(500px) rotateY(-20deg);
-    transition: transform var(--trans-timing-in), filter var(--trans-timing-in);
-  }
 `;
 
 const Wrapper = styled.article`
-  transition: var(--trans-timing-out);
-  transition-delay: var(--trans-timing-in);
+  // transition: var(--trans-timing-out);
+  // transition-delay: var(--trans-timing-in);
+  position: relative;
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    // will-change: transform;
+    ${Link}:hover &  {
+      // filter: drop-shadow(16px 16px 20px hsla(0deg, 0%, 0%, 0.2));
+      // transform: perspective(500px) rotateY(-20deg);
+      // transition: transform var(--trans-timing-in), filter var(--trans-timing-in);
+    }
+  }
 `;
 
 const ImageWrapper = styled.div`
-  position: relative;
   border-radius: 16px 16px 4px 4px;
-  overflow: hidden;
-  &:hover img {
-    transform: scale(1.1);
-    transition: transform filter;
-    transition-duration: var(--trans-timing-in);
-    filter: saturate(100%);
-  }
-  &:hover div {
-   animation: wobble 600ms;
-  }
+  /* To keep image contained during scale */
+  // overflow: hidden;
 `;
 
 const Image = styled.img`
   width: 100%;
-  display: block;
-   will-change: transform;
-   transition: transform filter;
-   transition-duration:  var(--trans-timing-out);
-  transform-origin: center 70%;
-  filter: saturate(50%);
+  display: block;;
+
+  @media (prefers-reduced-motion: no-preference) {
+  //  will-change: transform, filter;
+  //  transition: transform filter;
+  //  transition-duration:  var(--trans-timing-out);
+  // transform-origin: center 75%;
+  //  filter: saturate(50%);
+
+   ${Link}:hover &,
+   ${Link}:focus & {
+    // transform: scale(1.1);
+    // transition: transform filter;
+    // transition-duration: var(--trans-timing-in);
+    // filter: saturate(100%);
+   }
+  }
 `;
 
 const Row = styled.div`
@@ -151,6 +155,11 @@ const Flag = styled.div`
   font-weight: ${WEIGHTS.bold};
   color: var(--color-white);
   border-radius: 2px;
+
+  ${Link}:hover &,
+  ${Link}:focus & {
+    // animation: wobble 600ms;
+  }
 `;
 
 const SaleFlag = styled(Flag)`

@@ -6,7 +6,7 @@ import ShoeCard from '../ShoeCard';
 
 const ShoeGrid = () => {
   return (
-    <Wrapper>
+    <Wrapper className='shoeWrapper'>
       {SHOES.map((shoe) => (
         <ShoeWrapper key={shoe.slug}>
           <ShoeCard {...shoe} />
